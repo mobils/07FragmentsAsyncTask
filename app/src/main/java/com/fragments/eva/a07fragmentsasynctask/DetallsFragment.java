@@ -1,12 +1,13 @@
 package com.fragments.eva.a07fragmentsasynctask;
 
-import android.content.Context;
+import android.app.Activity;
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -28,18 +29,25 @@ public class DetallsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detalls, container, false);
+        View view =inflater.inflate(R.layout.fragment_detalls, container, false);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            TextView textView = view.findViewById(R.id.dadesRebudes);
+            textView.setText(bundle.getString("nom"));
+        }
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onFragmentInteractionDetalls(uri);
         }
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Activity context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
@@ -67,6 +75,6 @@ public class DetallsFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteractionDetalls(Uri uri);
     }
 }
